@@ -14,14 +14,17 @@ def main():
     count = args.count
     sub = args.sub
     imgs_folder = 'imgs_' + sub
-    imgs_url = 'https://www.reddit.com/r/' + sub + '/.json' + '?count='+count
+    imgs_url = 'https://www.reddit.com/r/' + sub + '/.json' + '?limit='+count
     req = Request(imgs_url)
-    req.add_header('User-agent', 'Stylesheet images downloader Py3 v1')
+    req.add_header('User-agent', 'Scrapy-xamfy v1')
     imgs_json = json.loads(urlopen(req).read())
+
+    print(len(imgs_json["data"]["children"]))
 
     imgs = []
     for i in range(1, int(count)+1):
-        # print(imgs_json["data"]["children"][i]["data"]["url"])
+        # print(i)
+        print(imgs_json["data"]["children"][i]["data"]["url"])
         imgs.append(imgs_json["data"]["children"][i]["data"]["url"])
 
     # imgs = [i for i in imgs_json['data']['images']]
